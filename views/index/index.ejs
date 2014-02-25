@@ -1,0 +1,384 @@
+<%- include ../public/header.ejs %>
+<script src="/js/allactionforGwd.js" type="text/javascript"></script>
+<div class="includeall" id="includeall">
+	<div class="wrapper_outer">
+        <div class="wrapper">
+            <div class="wrapper_logo">
+                <a href="#">
+                    <span class="wrapper_logo_txt">广外导航</span>
+                    <span>The Navigation Of GDUFS</span>
+                </a>
+            </div>
+            <!--  
+            <div class="wrapper_logo">
+                <a href="#">广外导航</a>
+            </div>
+            -->
+           <div class="wrapper_private">
+                <a href="{:U('Accounts/index')}">个人中心</a>
+            </div>
+        
+            <div class="wrapper_login wrapper_upper">
+                <ul>
+                   <if condition="!isLogged()">
+                        <li class="wrapper_li_border wrapper_li_border1"><a id="loginbtn" href="#">登录</a></li>
+                   <else/>
+                        <li class="upper_list upper_list1">
+                            <ul id="top_list" style="height:40px;border:none;"><!-- 把ul里面的样式去掉，然后把li_close和ul_close去掉就能显示列表了 -->
+                                <li class="li_close">
+                                    <a class="ul_close" href="#">{$Think.session.account.username}</a></li>
+                                <li>
+                                    <!-- <a class="a_onselect" href="">个人设置</a> -->
+                                    <a href="">个人设置</a>
+                                </li>
+                                <li><a href="{:U('Accounts/logout')}">注销</a></li>
+                            </ul>
+                        </li>
+                        <li class="wrapper_li_border wrapper_li_border1"><a href="{:U('Accounts/index')}">进入个人中心</a></li>
+                    </if>
+                </ul>     
+            </div>
+        
+
+        
+            
+        </div>
+    </div>
+    <div class="content_outer">
+        <div class="sidebar_left">
+            <div class="sidebar_container">
+                <div class="sidebar_hot" id="sidebar_hot">
+                    <p>最近最火网站</p>
+                    <a href="http://guide.mygdufs.com/" target="_blank">新生指南</a>
+                    <a href="http://xk.gdufs.edu.cn/" target="_blank" class="sidebar_hot_bottom">选课系统</a>
+                </div>
+            </div>
+            <div class="sidebar_container">
+                <a class="sidebar_gmain" href="http://auth.gdufs.edu.cn/wps/portal/newhome/" target="_blank"><span>数字广外</span></a>
+                <a class="sidebar_gps" href="http://strs.gdufs.edu.cn/WEB/" target="_blank"><span>卫星电视系统</span></a>
+            </div>
+            <div class="sidebar_container">
+                <a class="sidebar_news" href="http://news.gdufs.edu.cn/" target="_blank"><span>广外新闻网</span></a>
+                <a class="sidebar_lib" href="http://lib.gdufs.edu.cn/index.php" target="_blank"><span>广外图书馆</span></a>
+            </div>
+            <div class="sidebar_container">
+                <a class="sidebar_special" href="http://guide.mygdufs.com/" target="_blank"><span class="sidebar_cspan1">特别推荐</span><span class="sidebar_cspan2">新生指南</span></a>
+            </div>
+            <div id="movediv1" class="sidebar_container sidebar_container_share">
+                <div class="sidebar_share">
+                	<div class="sidebar_share1">期待您能分享<br />更好的想法和更好的网站...</div>
+                </div>
+                <div id="movediv2" class="sidebar_share sidebar_share2">
+                    <div class="sidebar_share_tdiv">
+                        <textarea id="sidebar_txt"></textarea>
+                    </div>
+                    <a href="#" id="submit_msg">发表建议</a>
+                </div>
+            </div>
+            <div class="cl"></div>
+        </div>
+        <div class="content_right">
+            <div class="search_div">
+            <form id="baidu_form" action="http://www.baidu.com/s" method="get">
+                <input id="search_input" type="text" name="wd" class="search_input" value="百度搜索" />
+                <span id="test1"></span>
+                <a class="search_btn2" id="baidu_search_btn" href="#" onclick="baidusearch()">百度一下</a>
+              </form>
+            </div>
+            <div class="devides_div">
+                <div><a class="content_entertain2" id="firstchange" href="#">学习生活娱乐</a></div>
+                <div><a class="content_stuunion1" id="secondchange" href="#">学生社团</a></div>
+                <div><a class="content_flag1" id="thirdchange" href="#">校内设施</a></div>
+            </div>
+            <div class="content_main" id="content_main">
+                <div class="content_unit" id="learnclass" style="display:block">
+                    <div class="content_unit_head">
+                        <p>学习</p>
+                    </div>
+                    <div class="website_div website_learning">
+                        <div class="website_div2" id="learnclass1">
+                            <ul>
+                                <% list.forEach(function(listitem){ %>
+                                    <% include ../tpl/home_site %>
+                                <% }) %>
+                            </ul>
+                        </div>
+                        <div class="website_div3">
+                            <a href="#" class="lastpage_btn">上一页</a>
+                            <a href="#" class="nextpage_btn">下一页</a>
+                        </div>
+                    </div>
+                    <div class="cl"></div>
+                </div>
+                <div class="content_unit" id="lifeclass" style="display:block">
+                    <div class="content_unit_head">
+                        <p>生活</p>
+                    </div>
+                    <div class="website_div website_learning">
+                        <div class="website_div2" id="lifeclass1">
+                            <ul>
+                                <% list.forEach(function(listitem){ %>
+                                    <% include ../tpl/home_site %>
+                                <% }) %>
+                            </ul>
+                        </div>
+                        <div class="website_div3">
+                            <a href="#" class="lastpage_btn">上一页</a>
+                            <a href="#" class="nextpage_btn">下一页</a>
+                        </div>
+                    </div>
+                    <div class="cl"></div>
+                </div>
+                <div class="content_unit" id="entertainclass" style="display:block">
+                    <div class="content_unit_head">
+                        <p>娱乐</p>
+                    </div>
+                    <div class="website_div website_learning">
+                        <div class="website_div2" id="entertainclass1">
+                           <ul>
+                               <volist name="arr.1" id="site1">
+                                    <li><a href="{$site1.site}">{$site1.name}</a></li>
+                                </volist>
+                            </ul>
+                        </div>
+                        <div class="website_div3">
+                            <a href="#" class="lastpage_btn">上一页</a>
+                            <a href="#" class="nextpage_btn">下一页</a>
+                        </div>
+                    </div>
+                    <div class="cl"></div>
+                </div>
+                <div class="content_unit" id="partyclass" style="display:none">
+                    <div class="content_unit_head">
+                        <p>团学党建</p>
+                    </div>
+                    <div class="website_div">
+                        <div class="website_div2" id="partyclass1">
+                           <ul>
+                                <volist name="arr.4" id="site4">
+                                    <li>
+                                    <a href="#">{$site4.name}</a>
+                                    <span class="span_hidden">{$site4.site}</span>
+                                    <span class="span_hidden">{$site4.info}</span>
+                                    <span class="span_hidden">{$site4.site}</span>
+                                    </li>
+                                </volist>
+                                
+                            </ul>
+                        </div>
+                        <div class="website_div3">
+                            <a href="#" class="lastpage_btn">上一页</a>
+                            <a href="#" class="nextpage_btn">下一页</a>
+                        </div>
+                    </div>
+                    <div class="cl"></div>
+                </div>
+                <div class="content_unit" id="workclass" style="display:none">
+                    <div class="content_unit_head">
+                        <p>勤工实体</p>
+                    </div>
+                    <div class="website_div">
+                        <div class="website_div2" id="workclass1">
+                            <ul>
+                                <volist name="arr.17" id="site17">
+                                    <li>
+                                    <a href="#">{$site17.name}</a>
+                                    <span class="span_hidden">{$site17.site}</span>
+                                    <span class="span_hidden">{$site17.info}</span>
+                                    <span class="span_hidden">{$site17.site}</span>
+                                    </li>
+                                </volist>
+                            </ul>
+                        </div>
+                        <div class="website_div3">
+                            <a href="#" class="lastpage_btn">上一页</a>
+                            <a href="#" class="nextpage_btn">下一页</a>
+                        </div>
+                    </div>
+                    <div class="cl"></div>
+                </div>
+                <div class="content_unit" id="unionclass" style="display:none">
+                    <div class="content_unit_head">
+                        <p>团联组织</p>
+                    </div>
+                    <div class="website_div">
+                        <div class="website_div2" id="unionclass1">
+                           <ul>
+                                <volist name="arr.5" id="site5">
+                                    <li>
+                                    <a href="#">{$site5.name}</a>
+                                    <span class="span_hidden">{$site5.site}</span>
+                                    <span class="span_hidden">{$site5.info}</span>
+                                    <span class="span_hidden">{$site5.site}</span>
+                                    </li>
+                                </volist>
+                            </ul>
+                        </div>
+                        <div class="website_div3">
+                            <a href="#" class="lastpage_btn">上一页</a>
+                            <a href="#" class="nextpage_btn">下一页</a>
+                        </div>
+                    </div>
+                    <div class="cl"></div>
+                </div>
+                <div id="specialclass" class="content_unit" style="display:none">
+                    <div class="content_unit_head">
+                        <p>特色组织</p>
+                    </div>
+                    <div class="website_div">
+                        <div class="website_div2" id="specialclass1">
+                            <ul>
+                                <volist name="arr.3" id="site3">
+                                    <li>
+                                    <a href="#">{$site3.name}</a>
+                                    <span class="span_hidden">{$site3.site}</span>
+                                    <span class="span_hidden">{$site3.info}</span>
+                                    <span class="span_hidden">{$site3.site}</span>
+                                    </li>
+                                </volist>
+                            </ul>
+                        </div>
+                        <div class="website_div3">
+                            <a href="#" class="lastpage_btn">上一页</a>
+                            <a href="#" class="nextpage_btn">下一页</a>
+                        </div>
+                    </div>
+                    <div class="cl"></div>
+                </div>
+                <div class="content_unit" id="educlass" style="display:none">
+                    <div class="content_unit_head">
+                        <p>教学单位</p>
+                    </div>
+                    <div class="website_div website_learning">
+                        <div class="website_div2" id="educlass1">
+                             <ul>
+                                <volist name="arr.6" id="site6">
+                                    <li><a href="{$site6.site}">{$site6.name}</a></li>
+                                </volist>
+                            </ul>
+                         </div>
+                        <div class="website_div3">
+                            <a href="#" class="lastpage_btn">上一页</a>
+                            <a href="#" class="nextpage_btn">下一页</a>
+                        </div>
+                    </div>
+                    <div class="cl"></div>
+                </div>
+                <div class="content_unit" id="searchclass" style="display:none">
+                    <div class="content_unit_head">
+                        <p>科研单位</p>
+                    </div>
+                    <div class="website_div website_learning">
+                        <div class="website_div2" id="searchclass1">
+                            <ul>
+                                <volist name="arr.9" id="site9">
+                                    <li><a href="{$site9.site}">{$site9.name}</a></li>
+                                </volist>
+                            </ul>
+                        </div>
+                        <div class="website_div3">
+                            <a href="#" class="lastpage_btn">上一页</a>
+                            <a href="#" class="nextpage_btn">下一页</a>
+                        </div>
+                    </div>
+                    <div class="cl"></div>
+                </div>
+                <div class="content_unit" id="shitclass" style="display:none">
+                    <div class="content_unit_head">
+                        <p>政党机关</p>
+                    </div>
+                    <div class="website_div website_learning">
+                        <div class="website_div2" id="shitclass1">
+                            <ul>
+                               <volist name="arr.8" id="site8">
+                                    <li><a href="{$site8.site}">{$site8.name}</a></li>
+                                </volist>
+                            </ul>
+                        </div>
+                        <div class="website_div3">
+                            <a href="#" class="lastpage_btn">上一页</a>
+                            <a href="#" class="nextpage_btn">下一页</a>
+                        </div>
+                    </div>
+                    <div class="cl"></div>
+                </div>
+            </div>
+            <div class="cl"></div>
+        </div>
+        <div class="footer" id="footer">
+        
+            <ul>
+                <li class="footer_li_1"><a href="http://www.quantacenter.org/">Copyright © 2013 Quanta（量子）信息技术服务中心</a></li>
+            </ul>
+             
+        </div>
+	</div>   
+</div>
+<div class="popup_div" id="popup_div1">
+	<div class="popup_content">
+        <a class="popup_a1" href="#">官方网址</a>
+        <a class="popup_a2" href="#">新浪官方微博</a>
+        <a class="popup_a3" href="#">官方博客</a>
+    </div>
+    <div class="popup_sharp">
+    </div>
+</div>
+<div class="login_div" id="login_div" style="display:none">
+    <div class="login_divhead"></div>
+    <div class="login_divbody">
+        <div class="login_adv">
+            <img src="__IMG__/adv_img.png">
+        </div>
+        <div class="login_form">
+        <form action="{:U('Accounts/login')}" method="post">
+            <div class="login_account">
+                <input type="text" name="username" />
+            </div>
+            <div class="login_password">
+                <input type="password" name="password" />
+            </div>
+            <p>
+                <input id="remenber_pwd" type="checkbox" name="autoLogin" checked="checked" />
+                <label for="remenber_pwd">记住密码</label>
+                <a href="http://passport.mygdufs.com/Account/find_psw_varify">忘记密码？</a>
+            </p>
+            <div class="login_getAc">
+                <input type="submit" id="login-submit" value="登录" />
+                <a href="http://passport.mygdufs.com/Account/register/appid/2">没账号？<span>马上注册！</span></a>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="popup_div2" id="popup_div2">
+    <div class="popup_div_c1">
+        <a href="#">登录</a>
+    </div>
+    <form action="{:U('Accounts/login')}" method="post">
+    <div>
+        <label>账号</label>
+        <br />
+        <input class="input1" name="username" type="text" />
+    </div>
+    <div>
+        <label>密码</label>
+        <br />
+        <input class="input1" name="password" type="password" />
+    </div>
+    <div>
+        <div class="popup_div_c2">
+            <label>
+                <input type="checkbox" name="autoLogin" checked="checked" />
+                自动登录
+            </label>
+        </div>
+        <div class="popup_div_c3">
+            <input type="submit" name="submitted" id="login-submit" value="登录" />
+        </div>
+    </div>
+    </form>
+</div>
+<%include ../public/footer.ejs %>
+	
