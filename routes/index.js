@@ -4,6 +4,7 @@
  */
 var mysql = require('../models/db');
 var site = require('../models/site');
+var sitetype = require('../models/sitetype');
 function debug(str){
 	console.log(str);
 }
@@ -22,5 +23,13 @@ module.exports = function(app){
 		});
 	});
 
+	app.get('/test', function(req, res){
+		
+		sitetype.getOpenedType(function callback(result){
+			debug(result['10']);
+			// res.send('dsfsdfs');
+		});
+		res.send("respond with a resource2");
+	});
 }
 
