@@ -20,6 +20,6 @@ Site.get = function(id, callback){
 }
 
 Site.getSiteByType = function(typeId, callback){
-	mysql.query(strutil.replaceTpl("select * from dh_site where typeId={typeId}",[{typeId:typeId}]), callback);
+	mysql.query(strutil.replaceTpl("select * from dh_site where typeId={typeId} order by orders asc",[{typeId:typeId}]), callback);
 }
 

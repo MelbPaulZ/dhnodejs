@@ -23,7 +23,7 @@ SiteType.get = function(typeId, callback){
 
 SiteType.getOpenedType = function(callback){
 	var arr = {};
-	debug('=========');
+	// debug('=========');
 	mysql.query(
 		strutil.replaceTpl("select typeId from dh_site_type where isOpened={isOpened}",[{isOpened:1}]), 
 		function(err, resultType, field){
@@ -34,7 +34,7 @@ SiteType.getOpenedType = function(callback){
 					// debug(result);
 					arr[key.typeId] = result;
 					// debug(arr);
-					if(index = resultType.length -1){
+					if(index == resultType.length -1){
 						// debug('end:==============='+key.typeId);
 						callback(arr);
 					}
