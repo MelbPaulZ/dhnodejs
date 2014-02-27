@@ -35,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
+
 //分散routes 3.0版本以后
 routes(app);
 routesUser(app);
