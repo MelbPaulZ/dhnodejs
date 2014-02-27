@@ -4,5 +4,6 @@
 module.exports = {
 	user: 'root',
 	password: '',
-	database: 'gwdh'
+	database: 'gwdh',
+	cookieSecret: 'gwdhnodejs'
 }

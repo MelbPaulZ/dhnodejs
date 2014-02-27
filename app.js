@@ -9,6 +9,7 @@ var path = require('path');
 //路由模块加载
 var routes = require('./routes');
 var routesUser = require('./routes/user');
+var settings = require('./settings');
 
 var app = express();
 
@@ -21,6 +22,12 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
+app.use(express.bodyParser({uploadDir:'./tmp'}));
+app.use(express.cookieParser());
+app.use(express.session({
+	secret: settings.cookieSecret
+}));
+
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 

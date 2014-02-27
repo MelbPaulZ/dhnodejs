@@ -17,16 +17,5 @@ module.exports = function(app){
 		});
 	});
 
-	app.get('/test', function(req, res){
-		
-		sitetype.getOpenedType(function callback(result){
-			// debug(result['10']);
-			// res.send('dsfsdfs');
-			var test = result['16'];
-			debug(test);
-
-		});
-		res.send("respond with a resource2");
-	});
 }
 

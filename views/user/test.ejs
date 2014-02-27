@@ -1,9 +1,9 @@
-<html>
-<head>
-	<title><%=title %></title>
-</head>
-<body>
-	<h1>test</h1>
-</body>
-</html>
+<%- include ../public/header.ejs %>
+
+<form action="/user/upload" method="post" enctype="multipart/form-data">
+	<input type="file" name="pic" />
+	<input type="submit" name="submitted" value="上传" />
+</form>
+
+<%- include ../public/footer.ejs %>
 	
