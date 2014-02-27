@@ -5,6 +5,7 @@
 var mysql = require('../models/db');
 var fs = require('fs');
 var strutil = require('../common/strutil');
+var sitetype = require('../models/sitetype');
 function debug(str){
 	console.log(str);
 }
@@ -19,13 +20,9 @@ module.exports = function(app){
 	});
 
 	app.get('/user', function(req, res){
-		var list = null;
-		mysql.query("select * from dh_site",function callback(err, result, fields){
-			// debug(result);
-			list = result;
-			res.render('user/index', { list: list, title:'users'});
+		sitetype.getOpenedType(function callback(result){
+			res.render('index/index', { list: result, title:'首页'});
 		});
-		// res.send("respond with a resource2");
 	});
 
 
@@ -36,6 +33,7 @@ module.exports = function(app){
 		var authcode = strutil.decode(form.authcode, key);
 		authcode = authcode.split('|');
 		debug(authcode);
+		//判断登陆信息是否正确
 		if(form.uid != authcode[0] || form.studentNumber != authcode[1] || form.password != authcode[2]){
 			res.redirect('/user');
 		}
