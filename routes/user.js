@@ -24,5 +24,11 @@ module.exports = function(app){
 		// res.send("<h1>/user/test</h1>");
 		res.render('user/test', {title : 'test'});
 	});
+
+	app.post('/user/login', function(req, res){
+		var form = req.body;
+		debug(form);
+		res.send(form);
+	});
 }
 

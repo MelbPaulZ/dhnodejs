@@ -22,39 +22,53 @@ $(document).ready(function(){
             }           
         });
     });
+
     $('#login-submit').click(function(){
-        var username=$('[name="username"]').val();
+        var studentNumber=$('[name="studentNumber"]').val();
         var password=$('[name="password"]').val();
-        if(checkPassword(username,password)){
-            return true;
-        }else{
-            return false;
-        }
-        
+        checkPassword(studentNumber, password);
+        return false;
     });
     
     
 });
 
-function checkPassword(username,password){
-    var bool = false;
+function debug(msg){
+    console.log(msg);
+}
+
+function checkPassword(studentNumber,password){
     $.ajax({
-        async: false,
-        url:"{:U('Accounts/checkPassword')}",
+        url:"http://192.168.233.21/Gwtxz/index.php/Api/checkLogin",
         type:'post',
-        data:{'username':username,'password':password,'submitted':'submitted'},
-        dataType:'json',
+        data:{'studentNumber':studentNumber,'password':password,'submitted':'submitted'},
+        dataType:'jsonp',
+        jsonp: 'jsonp',
         success:function(msg){
+            debug(msg);
+
+            $('#login-form input.hidden-user').remove();
             if(msg.status == 1){
-                bool = true;
+                var data = msg.data;
+                var fragment = document.createDocumentFragment();
+
+                for(var key in data){
+                    if (key == 'studentNumber' || key == 'password') {
+                        continue;
+                    };
+                    var value = data[key];
+                    var form = [{key:key, value:value}];
+                    var tpl = replaceTpl('<input class="hidden-user" type="hidden" name="{key}" value="{value}" />',  form);
+                    var input = $(tpl);
+                    fragment.appendChild(input[0]);
+                }
+                $('#login-form').append(fragment);
+                $('#login-form').submit();
             }else{
                 alert(msg.info);
-                bool = false;
             }
-                
         }           
     });
-    return bool;
 }
 
 </script>
@@ -65,11 +79,11 @@ $(document).ready(function() {
     $('#top_list').mouseenter(function(){
         $(this).css({height:'auto'});
         var top = $(this).find('li:first');
-        var username = top.find('a');
+        var studentNumber = top.find('a');
         var li_close = top.attr('class');
-        var ul_close = username.attr('class');
+        var ul_close = studentNumber.attr('class');
         // top.removeClass(li_close);
-        // username.removeClass(ul_close);
+        // studentNumber.removeClass(ul_close);
         // top.next('li').addClass(li_close);
         // alert(top.next().length);
     }).mouseleave(function(){
@@ -104,7 +118,7 @@ $(document).ready(function() {
                         <li class="upper_list upper_list1">
                             <ul id="top_list" style="height:40px;border:none;"><!-- 把ul里面的样式去掉，然后把li_close和ul_close去掉就能显示列表了 -->
                                 <li class="li_close">
-                                    <a class="ul_close" href="#">{$Think.session.account.username}</a></li>
+                                    <a class="ul_close" href="#">{$Think.session.account.studentNumber}</a></li>
                                 <li>
                                     <!-- <a class="a_onselect" href="">个人设置</a> -->
                                     <a href="">个人设置</a>
@@ -388,9 +402,9 @@ $(document).ready(function() {
             <img src="/images/adv_img.png">
         </div>
         <div class="login_form">
-        <form action="{:U('Accounts/login')}" method="post">
+        <form id="login-form" action="/user/login" method="post">
             <div class="login_account">
-                <input type="text" name="username" />
+                <input type="text" name="studentNumber" value="20111003632" />
             </div>
             <div class="login_password">
                 <input type="password" name="password" />
@@ -401,7 +415,7 @@ $(document).ready(function() {
                 <a href="http://passport.mygdufs.com/Account/find_psw_varify">忘记密码？</a>
             </p>
             <div class="login_getAc">
-                <input type="submit" id="login-submit" value="登录" />
+                <input type="submit" name="submitted" id="login-submit" value="登录" />
                 <a href="http://passport.mygdufs.com/Account/register/appid/2">没账号？<span>马上注册！</span></a>
             </div>
         </form>
@@ -410,33 +424,6 @@ $(document).ready(function() {
 </div>
 
 
-<div class="popup_div2" id="popup_div2">
-    <div class="popup_div_c1">
-        <a href="#">登录</a>
-    </div>
-    <form action="{:U('Accounts/login')}" method="post">
-    <div>
-        <label>账号</label>
-        <br />
-        <input class="input1" name="username" type="text" />
-    </div>
-    <div>
-        <label>密码</label>
-        <br />
-        <input class="input1" name="password" type="password" />
-    </div>
-    <div>
-        <div class="popup_div_c2">
-            <label>
-                <input type="checkbox" name="autoLogin" checked="checked" />
-                自动登录
-            </label>
-        </div>
-        <div class="popup_div_c3">
-            <input type="submit" name="submitted" id="login-submit" value="登录" />
-        </div>
-    </div>
-    </form>
-</div>
+
 <%include ../public/footer.ejs %>
 	

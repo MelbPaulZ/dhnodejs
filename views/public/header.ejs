@@ -10,8 +10,8 @@
 <script type="text/javascript" src="/js/jquery.dragsort-0.5.1.js"></script>
 <script type="text/javascript" src="/js/pc_square.js"></script>
 <script type="text/javascript" src="/js/pc_page.js"></script>
-<script type="text/javascript" src="/js/pc_scroll.js"></script>
-<script type="text/javascript" src="/js/scrollBar.js"></script>
+<!-- <script type="text/javascript" src="/js/pc_scroll.js"></script> -->
+<!-- <script type="text/javascript" src="/js/scrollBar.js"></script> -->
 
 <!--[if IE 6]>
 <script type="text/javascript" src="/js/DD_belatedPNG_0.0.8a.js" ></script>
@@ -20,3 +20,20 @@
 
 </head>
 <body>
+<script type="text/javascript">
+function replaceTpl(template,data){  
+    var outPrint="";  
+    for(var i = 0 ; i < data.length ; i++){  
+        var matchs = template.match(/\{[a-zA-Z0-9_]+\}/gi);  
+        var temp="";  
+        for(var j = 0 ; j < matchs.length ;j++){  
+            if(temp == "")  
+                temp = template;  
+            var re_match = matchs[j].replace(/[\{\}]/gi,"");  
+            temp = temp.replace(matchs[j],data[i][re_match]);  
+        }  
+        outPrint += temp;  
+    }  
+    return outPrint;
+}
+</script>
