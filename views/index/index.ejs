@@ -30,7 +30,6 @@ $(document).ready(function(){
         return false;
     });
     
-    
 });
 
 function debug(msg){
@@ -58,6 +57,7 @@ function checkPassword(studentNumber,password){
                     };
                     var value = data[key];
                     var form = [{key:key, value:value}];
+                    var replaceTpl = <%- strutil.replaceTpl %>;
                     var tpl = replaceTpl('<input class="hidden-user" type="hidden" name="{key}" value="{value}" />',  form);
                     var input = $(tpl);
                     fragment.appendChild(input[0]);
